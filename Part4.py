@@ -216,6 +216,164 @@ def last_word(text):
 
         text = text[(index + 1):]
 
+# 4.3.1 Change the value of an item
+# Please write a program which initializes a list with the values 
+# [1, 2, 3, 4, 5]. Then the program should ask the user for an index and a new 
+# value, replace the value at the given index, and print the list again. This 
+# should be looped over until the user gives -1 for the index. You can assume 
+# all given index values will fall within your list.
+my_list = [1, 2, 3, 4, 5]
+index = 0
+while True:
+    index = int(input("Index: "))
+    
+    if index == -1:
+        break
+
+    value = int(input("New value: "))
+    my_list[index] = value
+    print(my_list)
+
+# 4.3.2 Add items to a list
+# Please write a program which first asks the user for the number of items to 
+# be added. Then the program should ask for the given number of values, one by 
+# one, and add them to a list in the order they were typed in. Finally, the list
+# is printed out.
+item = int(input("How many items: "))
+index = 0
+my_list = []
+while index < item:
+    my_list.append(int(input(f"Item {index + 1}: ")))
+    index += 1
+print(my_list)
+
+# 4.3.3 Addition and removal
+# Please write a program which asks the user to choose between addition and 
+# removal. Depending on the choice, the program adds an item to or removes an
+#  item from the end of a list. The item that is added must always be one 
+# greater than the last item in the list. The first item to be added must be 1.
+#
+# The list is printed out in the beginning and after each operation.
+my_list = []
+while True:
+    length = len(my_list)
+    print("The list is now", my_list)
+    choice = input("a(d)d, (r)emove or e(x)it: ")
+
+    if choice == "x":
+        print("Bye!")
+        break
+    
+    if choice == "d":
+        value = length + 1
+        my_list.append(value)
+    
+    if choice == "r":
+        my_list.pop(length - 1)
+    
+# 4.3.4 Same word twice
+# Please write a program which asks the user for words. If the user types in a 
+# word for the second time, the program should print out the number of different
+#  words typed in, and exit.
+my_list = []
+while True:
+    word = input("Word: ")
+    if word in my_list:
+        print(f"You typed in {len(my_list)} different words")
+        break
+    else:
+        my_list.append(word)
+
+# 4.3.5 List twice
+# Please write a program which asks the user to type in values and adds them to 
+# a list. After each addition, the list is printed out in two different ways:
+# - in the order the items were added
+# - ordered from smallest to greatest
+# The program exits when the user types in 0.
+my_list = []
+while True:
+    item = input("New item: ")
+
+    if item == "0":
+        print("Bye!")
+        break
+
+    my_list.append(int(item))
+    print("The list now:", my_list)
+    print("The list in order:", sorted(my_list))
+
+# 4.3.6 The length of a list
+# Please write a function named length which takes a list as its argument and
+# returns the length of the list.
+def length(my_list: list):
+    return len(my_list)
+
+# 4.3.7 Arithmetic mean
+# Please write a function named mean, which takes a list of integers as an
+# argument. The function returns the arithmetic mean of the values in the list.
+def mean(my_list: list):
+    return sum(my_list) / len(my_list)
+
+# 4.3.8 The range of a list
+# Please write a function named range_of_list, which takes a list of integers as 
+# an argument. The function returns the difference between the smallest and the 
+# largest value in the list.
+def range_of_list(my_list: list):
+    return max(my_list) - min(my_list)
+
+# 4.4.1 Star-studded
+# Please write a program which asks the user to type in a string. The program 
+# then prints each input character on a separate line. After each character 
+# there should be a star (*) printed on its own line.
+input_string = input("Please type in a string: ")
+for character in input_string:
+    print(character)
+    print("*")
+
+# 4.4.2 From negative to positive
+# Please write a program which asks the user for a positive integer N. The 
+# program then prints out all numbers between -N and N inclusive, but leaves out 
+# the number 0. Each number should be printed on a separate line.
+value = int(input("Please type in a positive integer： "))
+for i in range(-value, 0):
+    print(i)
+for i in range(1, value + 1):
+    print(i)
+
+# 4.4.3 List of stars
+# Please write a function named list_of_stars, which takes a list of integers as 
+# its argument. The function should print out lines of star characters. The 
+# numbers in the list specify how many stars each line should contain.
+def list_of_stars(my_list: list):
+    for item in my_list:
+        print("*" * item)
+
+# 4.4.4 Anagrams
+# Please write a function named anagrams, which takes two strings as arguments. 
+# The function returns True if the strings are anagrams of each other. Two words
+# are anagrams if they contain exactly the same characters.
+def anagrams(str1: str, str2: str):
+    if sorted(str1) == sorted(str2):
+        return True
+    else:
+        return False
+
+# 4.4.5 Palindromes
+# Please write a function named palindromes, which takes a string argument and
+# returns True if the string is a palindrome. Palindromes are words which are 
+# spelled exactly the same backwards and forwards.
+def palindromes(word: str):
+    return word == word[::-1]
+
+while True:
+            word = input("Please type in a palindrome: ")
+            if palindromes(word):
+                print(f"{word} is a palindrome!")
+                break
+            else:
+                print("that wasn't a palindrome")
+                
+
 
 
 
