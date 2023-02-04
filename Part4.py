@@ -373,8 +373,115 @@ while True:
             else:
                 print("that wasn't a palindrome")
                 
+# 4.4.6 The sum of positive numbers
+# Please write a function named `sum_of_positives`, which takes a list of 
+# integers as its argument. The function returns the sum of the positive values
+# in the list.
+def sum_of_positives(my_list : list):
+    positives = []
+    for item in my_list:
+        if item > 0:
+            positives.append(item)
+    
+    return(sum(positives))
 
+# 4.4.7 Even numbers
+# Please write a function named even_numbers, which takes a list of integers as
+#  an argument. The function returns a new list containing the even numbers from 
+# the original list.
+def even_numbers(my_list : list):
+    even = []
 
+    for item in my_list:
+        if item % 2 == 0:
+            even.append(item)
+    
+    return(even)
+
+# 4.4.8 The sum of lists
+# Please write a function named list_sum which takes two lists of integers as 
+# arguments. The function returns a new list which contains the sums of the 
+# items at each index in the two original lists. You may assume both lists have
+# the same number of items.
+def list_sum(list1 : list, list2 : list):
+    sum_list = []
+    
+    for i in range(len(list1)):
+        sum_list.append(list1[i] + list2[i])
+
+    return(sum_list)
+
+# 4.4.9 Distinct numbers
+# Please write a function named distinct_numbers, which takes a list of integers 
+# as its argument. The function returns a new list containing the numbers from 
+# the original list in order of magnitude, and so that each distinct number is 
+# present only once.
+def distinct_numbers(my_list : list):
+    new = []
+    
+    for item in my_list:
+        if item not in new:
+            new.append(item)
+
+    return(sorted(new))
+
+# 4.4.10 The length of the longest in the list
+# Please write a function named `length_of_longest`, which takes a list of
+# strings as its argument. The function returns the length of the longest string.
+def length_of_longest(my_list : list):
+    length = 0
+    for item in my_list:
+        if len(item) > length:
+            length = len(item)
+    
+    return(length)
+
+# 4.4.11 The shortest in the list
+# Please write a function named shortest, which takes a list of strings as its
+# argument. The function returns whichever of the strings is the shortest. If 
+# more than one are equally short, the function can return any of the shortest 
+# strings (there will be no such situation in the tests). You may assume there 
+# will be no empty strings in the list.
+def shortest(my_list : list):
+    length = len(my_list[0])
+    shorter = ""
+    for item in my_list:
+        if length > len(item):
+            length = len(item)
+            shorter = item
+    return(shorter)
+
+# 4.4.12 All the longest in the list
+# Please write a function named all_the_longest, which takes a list of strings 
+# as its argument. The function should return a new list containing the longest 
+# string in the original list. If more than one are equally long, the function 
+# should return all of the longest strings.The order of the strings in the 
+# returned list should be the same as in the original.
+def all_the_longest(my_list : list):
+    length = 0
+    longer = []
+    for item in my_list:
+        if length == len(item):
+            longer.append(item)
+        elif length < len(item):
+            length = len(item)
+            longer = []
+            longer.append(item)
+    return(longer)
+
+# 4.5.1 Integer to strings
+# Please write a function named formatted, which takes a list of floating point 
+# numbers as its argument. The function returns a new list, which contains each 
+# element of the original list in string format, rounded to two decimal points. 
+# The order of the items in the list should remain unchanged.
+#
+# Hint: use f-strings to format the floating point numbers into suitable strings.
+def formatted(my_list : list):
+    new = []
+    for item in my_list:
+        newItem = f"{item:.2f}"
+        new.append(newItem)
+    return(new)
 
 
 
