@@ -548,19 +548,7 @@ def no_shouting(my_list : list):
 #
 # For example, in the list [1, 2, 5, 4, 3, 4] the longest list of neighbors 
 # would be [5, 4, 3, 4], with a length of 4.
-def longest_series_of_neighbours(my_list : list):
-    count = 1
-    max = 1
-    for i in range(0, len(my_list)-1):
-        if abs(my_list[i+1] - my_list[i]) == 1:
-            count += 1
-            if max <= count:
-                max = count
-        else:
-            count = 1
-    return(max)
-
-# Grade statistics
+# Collect input data and modify data
 def grade_input():
     course_info = []
     while True:
@@ -568,43 +556,50 @@ def grade_input():
         if input_grade == "":
             print("Statistics:")
             break
-        course_info.extend(input_grade.split(" "))
+        course_info.extend(input_grade.split())
+    
+    # Covert string list to integer list
     course_info = [int(x) for x in course_info]
-    return(course_info)
-    
-def statistics_arrange(course_info : list):
-    input_list = []
-    for item in course_info:
-        input_list.append(item)
-    for i in range(1, len(input_list), 2):
-        input_list[i] = input_list[i] // 10
-    
-    raw_score = []
-    for i in range(0, len(input_list)-1, 2):
-        if input_list[i] < 10:
-            input_list[i] = -100
-        raw_score.append(input_list[i] + input_list[i+1])
-    
-    return(raw_score)
 
-def course_grade(raw_score : list):
+    # Calculate exercise score
+    for i in range(1, len(course_info), 2):
+        course_info[i] = course_info[i] // 10
+
+    return course_info
+
+# Calculate total score
+def calculate_score(course_info : list):
+    total_score = []
+    for i in range(0, len(course_info)-1, 2):
+        total_score.append(course_info[i] + course_info[i+1])
+    
+    return total_score
+
+# Allocate course grades
+def course_grade(course_info : list):
     grade = []
-    for item in raw_score:
-        if item <= 14:
+    for i in range(0, len(course_info), 2):
+        if course_info[i] < 10:
             grade.append(0)
-        elif 15 <= item <= 17:
+            continue
+
+        total = course_info[i] + course_info[i+1]
+        if total <= 14:
+            grade.append(0)
+        elif 15 <= total <= 17:
             grade.append(1)
-        elif 18 <= item <= 20:
+        elif 18 <= total <= 20:
             grade.append(2)
-        elif 21 <= item <= 23:
+        elif 21 <= total <= 23:
             grade.append(3)
-        elif 24 <= item <= 27:
+        elif 24 <= total <= 27:
             grade.append(4)
-        elif 28 <= item <= 30:
+        elif 28 <= total <= 30:
             grade.append(5)
     
     return(grade)
 
+# Draw the grade distribution graph
 def grade_dist(grade : list):
     dist = []
     for i in range(6):
@@ -615,14 +610,9 @@ def grade_dist(grade : list):
         length = "*" * dist[i]
         print(f"  {i}: {length}")
 
-def course_statistics(grade : list, course_info : list):
-    for i in range(1, len(course_info), 2):
-        course_info[i] = course_info[i] // 10
-    
-    all_score = []
-    for i in range(0, len(course_info)-1, 2):
-        all_score.append(course_info[i] + course_info[i+1])
-    points_average = sum(all_score) / len(all_score)
+# Final conclusion
+def course_statistics(grade : list, total_score : list):
+    points_average = sum(total_score) / len(total_score)
     print(f"Points average: {points_average:.1f}")
 
     fail = grade.count(0)
@@ -633,8 +623,8 @@ def course_statistics(grade : list, course_info : list):
 
 def main():
     course_info = grade_input()
-    raw_score = statistics_arrange(course_info)
-    grade = course_grade(raw_score)
-    course_statistics(grade, course_info)
+    total_score = calculate_score(course_info)
+    grade = course_grade(course_info)
+    course_statistics(grade, total_score)
 
 main()
