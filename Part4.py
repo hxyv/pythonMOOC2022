@@ -493,13 +493,148 @@ def everything_reversed(my_list : list):
     for item in my_list[::-1]:
         new_list.append(item[::-1])
     return(new_list)
+    
+# 4.6.2 Most common character
+# Please write a function named most_common_character, which takes a string
+# argument. The function returns the character which has the most occurrences 
+# within the string. If there are many characters with equally many occurrences, 
+# the one which appears first in the string should be returned.
+def most_common_character(my_string : str):
+    count = 0
+    most = ""
+    for i in range(0, len(my_string)):
+       if my_string.count(my_string[i]) > count: 
+            most = my_string[i]
+            count = my_string.count(my_string[i])
+    return(most)
 
+# 4.6.3 No vowels allowed
+# Please write a function named no_vowels, which takes a string argument. The 
+# function returns a new string, which should be the same as the original but 
+# with all vowels removed.
+#
+# You can assume the string will contain only characters from the lowercase 
+# English alphabet a...z.
+def no_vowels(my_string : str):
+    my_string = my_string.replace("e", "") 
+    my_string = my_string.replace("o", "") 
+    my_string = my_string.replace("a", "") 
+    my_string = my_string.replace("i", "") 
+    my_string = my_string.replace("u", "") 
 
+    return(my_string)
 
+# 4.6.4 No shouting allowed
+# The Python string method `isupper()` returns True is a string consists of only
+# uppercase characters.
+# Please use the isupper() method to write a function named no_shouting, which
+# takes a list of strings as an argument. The function returns a new list, 
+# containing only those items from the original which do not consist of solely
+# uppercase characters.
+def no_shouting(my_list : list):
+    new = []
+    for item in my_list:
+        if item.isupper() is False:
+            new.append(item)
+    return(new)
 
+# 4.6.5 Neighbors in a list
+# Given a list of integers, let's decide that two consecutive items in the list 
+# are neighbors if their difference is 1. So, items 1 and 2 would be neighbors,
+# and so would items 56 and 55.
+#
+# Please write a function named longest_series_of_neighbors, which looks for 
+# the longest series of neighbors within the list, and returns its length.
+#
+# For example, in the list [1, 2, 5, 4, 3, 4] the longest list of neighbors 
+# would be [5, 4, 3, 4], with a length of 4.
+def longest_series_of_neighbours(my_list : list):
+    count = 1
+    max = 1
+    for i in range(0, len(my_list)-1):
+        if abs(my_list[i+1] - my_list[i]) == 1:
+            count += 1
+            if max <= count:
+                max = count
+        else:
+            count = 1
+    return(max)
 
+# Grade statistics
+def grade_input():
+    course_info = []
+    while True:
+        input_grade = input("Exam points and exercises completed: ")
+        if input_grade == "":
+            print("Statistics:")
+            break
+        course_info.extend(input_grade.split(" "))
+    course_info = [int(x) for x in course_info]
+    return(course_info)
+    
+def statistics_arrange(course_info : list):
+    input_list = []
+    for item in course_info:
+        input_list.append(item)
+    for i in range(1, len(input_list), 2):
+        input_list[i] = input_list[i] // 10
+    
+    raw_score = []
+    for i in range(0, len(input_list)-1, 2):
+        if input_list[i] < 10:
+            input_list[i] = -100
+        raw_score.append(input_list[i] + input_list[i+1])
+    
+    return(raw_score)
 
+def course_grade(raw_score : list):
+    grade = []
+    for item in raw_score:
+        if item <= 14:
+            grade.append(0)
+        elif 15 <= item <= 17:
+            grade.append(1)
+        elif 18 <= item <= 20:
+            grade.append(2)
+        elif 21 <= item <= 23:
+            grade.append(3)
+        elif 24 <= item <= 27:
+            grade.append(4)
+        elif 28 <= item <= 30:
+            grade.append(5)
+    
+    return(grade)
 
+def grade_dist(grade : list):
+    dist = []
+    for i in range(6):
+        dist.append(grade.count(i)) 
+        
+    print("Grade distribution: ")
+    for i in range(5, -1, -1):
+        length = "*" * dist[i]
+        print(f"  {i}: {length}")
 
+def course_statistics(grade : list, course_info : list):
+    for i in range(1, len(course_info), 2):
+        course_info[i] = course_info[i] // 10
+    
+    all_score = []
+    for i in range(0, len(course_info)-1, 2):
+        all_score.append(course_info[i] + course_info[i+1])
+    points_average = sum(all_score) / len(all_score)
+    print(f"Points average: {points_average:.1f}")
 
+    fail = grade.count(0)
+    pass_percent = (len(grade)-fail) / len(grade) * 100
+    print(f"Pass percentage: {pass_percent:.1f}")
 
+    grade_dist(grade)
+
+def main():
+    course_info = grade_input()
+    raw_score = statistics_arrange(course_info)
+    grade = course_grade(raw_score)
+    course_statistics(grade, course_info)
+
+main()
