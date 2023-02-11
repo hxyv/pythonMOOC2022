@@ -101,3 +101,41 @@ def sudoku_grid_correct(sudoku: list):
                 return False
 
     return True
+
+# 5.2.1 Items multiplied by two
+def double_items(numbers: list):
+    new_numbers = []
+    for item in numbers:
+        new_numbers.append(item * 2)
+    return new_numbers
+
+# 5.2.2 Remove the smallest
+def remove_smallest(number: list):
+    number.remove(min(number))
+
+# 5.2.3 Sudoku: print out the grid and add a number
+def print_sudoku(sudoku: list):
+    height = 0
+    for row in sudoku:
+        height += 1
+        if height == 4 or height == 7:
+            print()
+
+        for i in range(len(row)):
+            if i == 3 or i == 6:
+                print(" ", end="")
+
+            if i == 0 and row[i] > 0:
+                print(row[i], end="")
+                continue
+            elif i == 0 and row[i] == 0:
+                print("_", end="")
+                continue 
+            
+            if row[i] > 0:
+                print(f" {row[i]}", end="") 
+            else:
+                print(" _", end="")
+        print()
+
+# Sudoku: add number to a copy of the grid
